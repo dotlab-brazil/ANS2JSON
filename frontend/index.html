@@ -15,12 +15,12 @@
         <div class="card p-4 shadow-lg">
             <h1 class="text-center mb-3">ANS2JSON</h1>
             <h2 class="text-center mb-3">Aplicativo para Extração de dados da Avaliação Neurológica Simplificada</h2>
-            <p class="text-center text-muted">Envie imagens do Formulário para Avaliação Neurológica Simplificada e receba os resultados digitalizados em formato JSON. Dê preferência a uma única imagem que contenha frente e verso do formulário.</p>
+            <p class="text-center text-muted">Envie imagens digitalizadas do Formulário para Avaliação Neurológica Simplificada e receba os resultados digitalizados em formato JSON. Dê preferência a uma única imagem que contenha frente e verso do formulário.</p>
             <br>
             <h5 class="text-center fw-bold">Método de Envio:</h5>
             <p id="limit-text" class="text-center text-muted"></p>
             <form id="upload-form">
-                <div class="row text-center g-3 mt-2">
+                <div class="row text-center g-3 mt-2 justify-content-center">
                     <input type="file" id="single-file-input" class="hidden-input" accept="image/*">
                     <input type="file" id="folder-input" class="hidden-input" webkitdirectory directory multiple>
 
@@ -35,12 +35,6 @@
                             <i class="fas fa-folder-open"></i>
                             <p>Enviar Pasta</p>
                         </label>
-                    </div>
-                    <div class="col-md-4">
-                        <div id="camera-box" class="icon-upload-box" data-bs-toggle="modal" data-bs-target="#camera-modal">
-                            <i class="fas fa-camera"></i>
-                            <p>Usar Câmera</p>
-                        </div>
                     </div>
                 </div>
             </form>
@@ -63,26 +57,6 @@
                             <i class="fas fa-download me-2"></i>Baixar JSON
                         </button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal da câmera -->
-    <div class="modal fade" id="camera-modal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Câmera</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <video id="camera-stream" autoplay playsinline></video>
-                    <canvas id="camera-canvas"></canvas>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="capture-btn">Capturar Foto</button>
                 </div>
             </div>
         </div>
