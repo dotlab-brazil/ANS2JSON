@@ -1,0 +1,99 @@
+:root {
+    --primary-color: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --background-color: #f0f2f5;
+    --text-muted: #495057;
+    --code-bg: #282c34;
+    --code-text: #abb2bf;
+}
+
+body { 
+    background-color: var(--background-color); 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+.container { 
+    max-width: 900px; 
+}
+
+.card { 
+    border: none; 
+    border-radius: 0.75rem; 
+}
+
+.spinner-border { 
+    display: none; 
+}
+
+#resultado-json {
+    background-color: var(--code-bg); 
+    color: var(--code-text); 
+    border-radius: 5px;
+    padding: 15px; 
+    max-height: 600px; 
+    overflow-y: auto;
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.upload-section { 
+    margin-top: 1.5rem; 
+    text-align: center; 
+}
+
+#camera-modal .modal-dialog { 
+    max-width: 90%; 
+}
+
+#camera-stream { 
+    width: 100%; 
+    border-radius: 0.5rem; 
+    background-color: #000; 
+}
+
+#camera-canvas { 
+    display: none; 
+}
+
+.icon-upload-box {
+    border: 2px dashed var(--primary-color); 
+    border-radius: 0.5rem; 
+    padding: 2rem 1rem; 
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 100%;
+}
+
+.icon-upload-box:hover { 
+    background-color: #e9ecef; 
+    border-color: var(--primary-hover); 
+}
+
+.icon-upload-box i { 
+    font-size: 3rem; 
+    color: var(--primary-color); 
+}
+
+.icon-upload-box p { 
+    margin-top: 0.75rem; 
+    font-weight: 500; 
+    color: var(--text-muted); 
+}
+
+.hidden-input { 
+    display: none; 
+}
+
+.download-btn { 
+    margin-top: 1rem; 
+    transition: transform 0.2s;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+}
