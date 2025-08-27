@@ -1,5 +1,5 @@
-# Use Python 3.11 slim image as base
-FROM python:3.11-slim
+# Use Python 3.10 slim image as base (more compatible with OpenGL packages)
+FROM python:3.10-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -25,10 +25,8 @@ RUN apt-get update && apt-get install -y \
     libglu1-mesa \
     libglu1-mesa-dev \
     libgl1-mesa-dri \
-    libglx-mesa0 \
     libglx0 \
     libglvnd0 \
-    libgl1 \
     libgtk-3-0 \
     libavcodec-dev \
     libavformat-dev \
@@ -39,7 +37,7 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libpng-dev \
     libtiff-dev \
-    libatlas-base-dev \
+    libopenblas-dev \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
