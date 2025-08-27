@@ -25,7 +25,6 @@ RUN apt-get update && apt-get install -y \
     libglu1-mesa \
     libglu1-mesa-dev \
     libgl1-mesa-dri \
-    libgl1-mesa-swx11 \
     libglx-mesa0 \
     libglx0 \
     libglvnd0 \
@@ -41,13 +40,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libtiff-dev \
     libatlas-base-dev \
-    libgstreamer1.0-0 \
-    libgstreamer-plugins-base1.0-0 \
-    libgstreamer-plugins-bad1.0-0 \
-    libgstreamer-gl1.0-0 \
-    libgstreamer-plugins-base1.0-dev \
-    libgstreamer1.0-dev \
-    libgstreamer-plugins-bad1.0-dev
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
