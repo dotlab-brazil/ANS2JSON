@@ -5,12 +5,26 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-client = DocumentAnalysisClient(
-    endpoint=Config.AZURE_FORM_RECOGNIZER_ENDPOINT,
-    credential=AzureKeyCredential(Config.AZURE_FORM_RECOGNIZER_KEY)
-)
+# Initialize Azure client only if credentials are available
+client = None
+if Config.AZURE_FORM_RECOGNIZER_ENDPOINT and Config.AZURE_FORM_RECOGNIZER_KEY:
+    try:
+        client = DocumentAnalysisClient(
+            endpoint=Config.AZURE_FORM_RECOGNIZER_ENDPOINT,
+            credential=AzureKeyCredential(Config.AZURE_FORM_RECOGNIZER_KEY)
+        )
+        logger.info("Azure Form Recognizer client initialized successfully")
+    except Exception as e:
+        logger.error(f"Failed to initialize Azure client: {e}")
+        client = None
+else:
+    logger.warning("Azure Form Recognizer credentials not provided, Azure functionality will be disabled")
 
 def extrair_dados_com_modelo_azure(image_path):
+    if not client:
+        logger.warning("Azure client not available, returning empty data")
+        return {"erro_azure": "Azure service not configured"}
+        
     try:
         with open(image_path, "rb") as f:
             poller = client.begin_analyze_document(model_id=Config.AZURE_CUSTOM_MODEL_ID, document=f)

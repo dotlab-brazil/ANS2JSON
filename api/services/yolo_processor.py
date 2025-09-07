@@ -1,8 +1,15 @@
 import math
 import pandas as pd
+import logging
 from models_loader import model_loader
 
+logger = logging.getLogger(__name__)
+
 def classificar_ponto(membro, ponto, bbox_membro, aspect_ratio, limb_area):
+    if not model_loader.rf_model or not model_loader.label_encoder or not model_loader.training_columns:
+        logger.warning("ML models not loaded, cannot classify point")
+        return "Não identificado"
+        
     lx1, ly1, lx2, ly2 = bbox_membro
     pw, ph = ponto['box'][2] - ponto['box'][0], ponto['box'][3] - ponto['box'][1]
     point_area = pw * ph if pw > 0 and ph > 0 else 0
@@ -28,6 +35,10 @@ def classificar_ponto(membro, ponto, bbox_membro, aspect_ratio, limb_area):
     return model_loader.label_encoder.inverse_transform(pred)[0]
 
 def analisar_regiao(imagem_np, tipo_regiao):
+    if not model_loader.yolo_model:
+        logger.warning("YOLO model not loaded, cannot analyze region")
+        return {"consultas_maos": [], "consultas_pes": []}
+        
     results = model_loader.yolo_model(imagem_np, verbose=False)[0]
     limbs, points = [], []
 

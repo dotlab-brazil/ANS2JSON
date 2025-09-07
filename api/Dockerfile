@@ -1,4 +1,4 @@
-# Use Python 3.10 slim image as base (more compatible with OpenGL packages)
+# Use Python 3.10 slim image as base (more compatible with ML libraries)
 FROM python:3.10-slim
 
 # Set environment variables
@@ -15,18 +15,13 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender-dev \
+    libxrender1 \
     libgomp1 \
     libgcc-s1 \
-    libglu1-mesa \
-    libglu1-mesa-dev \
-    libgl1-mesa-dri \
-    libglx0 \
-    libglvnd0 \
     libgtk-3-0 \
     libavcodec-dev \
     libavformat-dev \
@@ -42,15 +37,18 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
-COPY requirements-fixed.txt requirements.txt
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir opencv-python-headless==4.11.0.86 && \
     pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY . .
+
+# Create uploads directory and set proper permissions
+RUN mkdir -p uploads && \
+    chmod 755 uploads
 
 # Create a non-root user for security
 RUN useradd --create-home --shell /bin/bash app && \
