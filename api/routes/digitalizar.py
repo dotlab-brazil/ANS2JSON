@@ -1,7 +1,7 @@
 import os
 import cv2
 import logging
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app, make_response
 from werkzeug.utils import secure_filename
 from config import Config
 from services.yolo_processor import analisar_regiao
@@ -13,8 +13,10 @@ digitalizar_bp = Blueprint('digitalizar', __name__)
 
 MAX_FILES = 10
 
-@digitalizar_bp.route('/digitalizar', methods=['POST'])
+@digitalizar_bp.route('/digitalizar', methods=['POST', 'OPTIONS'])
 def digitalizar():
+    if request.method == 'OPTIONS':
+        return make_response(('', 204))
     files = request.files.getlist('image_files')
     if not files or files[0].filename == '':
         return jsonify({'error': 'Nenhum arquivo enviado'}), 400
