@@ -23,8 +23,8 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Vary'] = 'Origin'
     # response.headers['Access-Control-Allow-Credentials'] = 'true'
-    response.headers['Access-Control-Allow-Methods'] = ', '.join(Config.CORS_RESOURCES.get(r"/api/*", {}).get("methods", ["GET", "POST", "OPTIONS"]))
-    response.headers['Access-Control-Allow-Headers'] = ', '.join(Config.CORS_RESOURCES.get(r"/api/*", {}).get("allow_headers", ["Content-Type"]))
+    response.headers['Access-Control-Allow-Methods'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = '*'
     response.headers['Access-Control-Max-Age'] = '86400'
     return response
 
@@ -33,4 +33,4 @@ def health_check():
     return {"status": "ok"}
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5051, debug=True)

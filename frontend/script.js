@@ -1,6 +1,6 @@
 // Configurações
 const CONFIG = {
-    API_ENDPOINT: 'http://127.0.0.1:5001/api/v1/digitalizar',
+    API_ENDPOINT: 'http://127.0.0.1:5051/api/v1/digitalizar',
     MAX_UPLOAD_MB: 50,
     MAX_FOLDER_FILES: 10,
     TIMEOUT_MS: 30000
