@@ -17,15 +17,15 @@ app.register_blueprint(digitalizar_bp, url_prefix='/api/v1')
 
 @app.after_request
 def add_cors_headers(response):
-    origin = request.headers.get('Origin')
-    allowed = set(Config.CORS_RESOURCES.get(r"/api/*", {}).get("origins", []))
-    if origin and ("*" in allowed or origin in allowed):
-        response.headers['Access-Control-Allow-Origin'] = origin
-        response.headers['Vary'] = 'Origin'
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
-        response.headers['Access-Control-Allow-Methods'] = ', '.join(Config.CORS_RESOURCES.get(r"/api/*", {}).get("methods", ["GET", "POST", "OPTIONS"]))
-        response.headers['Access-Control-Allow-Headers'] = ', '.join(Config.CORS_RESOURCES.get(r"/api/*", {}).get("allow_headers", ["Content-Type"]))
-        response.headers['Access-Control-Max-Age'] = '86400'
+    # origin = request.headers.get('Origin')
+    # allowed = set(Config.CORS_RESOURCES.get(r"/api/*", {}).get("origins", []))
+    # if origin and ("*" in allowed or origin in allowed):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Vary'] = 'Origin'
+    # response.headers['Access-Control-Allow-Credentials'] = 'true'
+    response.headers['Access-Control-Allow-Methods'] = ', '.join(Config.CORS_RESOURCES.get(r"/api/*", {}).get("methods", ["GET", "POST", "OPTIONS"]))
+    response.headers['Access-Control-Allow-Headers'] = ', '.join(Config.CORS_RESOURCES.get(r"/api/*", {}).get("allow_headers", ["Content-Type"]))
+    response.headers['Access-Control-Max-Age'] = '86400'
     return response
 
 @app.route('/health')
