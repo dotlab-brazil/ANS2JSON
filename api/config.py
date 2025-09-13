@@ -13,12 +13,13 @@ class Config:
 
     CORS_RESOURCES = {
         r"/api/*": {
-            "origins": [
-                "http://127.0.0.1:5500",
-                "http://localhost:5500",
-                "http://127.0.0.1:8000",
-                "http://localhost:8000"
-            ],
+            # "origins": [
+            #     "http://127.0.0.1:5500",
+            #     "http://localhost:5500",
+            #     "http://127.0.0.1:8000",
+            #     "http://localhost:8000"
+            # ],
+            "origins": ["*"],
             "methods": ["GET", "POST", "OPTIONS"],
             "allow_headers": ["Content-Type", "X-Requested-With", "Origin", "Accept"]
         }
